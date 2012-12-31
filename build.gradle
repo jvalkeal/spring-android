@@ -15,12 +15,16 @@ configure(allprojects) {
     group = 'org.springframework.android'
 
     ext.androidVersion = '4.1.1.4'
+    ext.androidSupportV4Version = '11'
 
     [compileJava, compileTestJava]*.options*.compilerArgs = ['-Xlint:none']
 
     repositories {
         maven { url "http://repo.springsource.org/libs-release" }
         maven { url "https://android-rome-feed-reader.googlecode.com/svn/maven2/releases" }
+		// for finding v4 support deployed via maven-android-sdk-deployer
+		// latest is rev 11, central only have revs 6 and 7
+		mavenLocal()
     }
     
     // servlet-api (2.5) and tomcat-servlet-api (3.0) classpath entries should not be
@@ -109,6 +113,75 @@ project('spring-android-rest-template') {
             optional dep
             transitive = false
         }
+    }
+}
+
+project('spring-android-integration-core') {
+    description = "Spring for Android Integration Core"
+    
+    dependencies {
+        compile ("com.google.android:android:$androidVersion", provided)
+        compile project (':spring-android-core')
+    }
+}
+
+project('spring-android-integration-ip') {
+    description = "Spring for Android Integration Ip"
+    
+    dependencies {
+        compile ("com.google.android:android:$androidVersion", provided)
+        compile project (':spring-android-integration-core')
+    }
+}
+
+project('spring-android-integration-http') {
+    description = "Spring for Android Integration Http"
+    
+    dependencies {
+        compile ("com.google.android:android:$androidVersion", provided)
+        compile project (':spring-android-integration-core')
+        compile project (':spring-android-rest-template')
+    }
+}
+
+project('spring-android-integration-image') {
+    description = "Spring for Android Integration Image"
+    
+    dependencies {
+        compile ("com.google.android:android:$androidVersion", provided)
+        compile project (':spring-android-integration-core')
+        compile project (':spring-android-integration-http')
+        compile project (':spring-android-rest-template')
+        compile project (':spring-android-cache')
+    }
+}
+
+project('spring-android-cache') {
+    description = "Spring for Android Cache"
+    
+    dependencies {
+        compile ("com.google.android:android:$androidVersion", provided)
+        compile project (':spring-android-core')
+    }
+}
+
+project('spring-android-support-v4-cache-disk') {
+    description = "Spring for Android v4 Support Cache Disk"
+    
+    dependencies {
+        compile ("com.google.android:android:$androidVersion", provided)
+        compile ("android.support:compatibility-v4:$androidSupportV4Version", provided)
+        compile project (':spring-android-cache')
+    }
+}
+
+project('spring-android-support-v4-cache-lru') {
+    description = "Spring for Android v4 Support Cache Lru"
+    
+    dependencies {
+        compile ("com.google.android:android:$androidVersion", provided)
+        compile ("android.support:compatibility-v4:$androidSupportV4Version", provided)
+        compile project (':spring-android-cache')
     }
 }
 

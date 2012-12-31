@@ -17,6 +17,10 @@
 		<module>/spring-android-core-test</module>
 		<module>/spring-android-rest-template-test</module>
 		<module>/spring-android-auth-test</module>
+		<module>/spring-android-integration-core-test</module>
+		<module>/spring-android-integration-image-test</module>
+		<module>/spring-android-cache-test</module>
+		<module>/spring-android-support-v4-cache-disk-test</module>
 	</modules>
 
 	<properties>

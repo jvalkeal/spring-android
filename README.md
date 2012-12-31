@@ -2,6 +2,8 @@
 
 [Spring for Android](http://www.springsource.org/spring-android) is an extension of the [Spring Framework](http://www.springsource.org/spring-framework) that aims to simplify the development of native [Android](http://developer.android.com/index.html) applications.
 
+NOTE: This fork depends on android v4 support library for backward compatibility for older api versions. Because only revisions 6/7 exists on public maven repositories, there is a dependency for newest support libraries deployed(e.g. to local maven repo) using maven-android-sdk-deployer(https://github.com/mosabua/maven-android-sdk-deployer). 
+
 ## Check Out and Build from Source
 
 1. Clone the repository from GitHub:
